@@ -3,3 +3,7 @@ Start by using
     
 
 entry point (package.json)
+
+using vite
+
+or use (npm create vite@latest)
