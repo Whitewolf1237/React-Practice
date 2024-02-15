@@ -1,8 +1,10 @@
+import Hello from "./test"
+import hello from "./test"
 function App() {
 
 
   return (
-    <h1>Hello with vite</h1>
+    <Hello/>
   )
 }
 
