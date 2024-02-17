@@ -1,0 +1,20 @@
+{
+  "name": "react-practice",
+  "version": "1.0.0",
+  "description": "This is a react practice resp.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/Whitewolf1237/React-Practice.git)"
+  },
+  "keywords": [
+    "react",
+    "nitin",
+    "practice"
+  ],
+  "author": "Nitin",
+  "license": "ISC"
+}
