@@ -17,6 +17,7 @@ const HeadingComponent=()=>
     (   
         <div id="container">
             <Title></Title>
+            {Title()}
             
             <h1 className="heading">Functional Component test case</h1>
             {<h2>{number}</h2>}
