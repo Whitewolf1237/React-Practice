@@ -2,30 +2,55 @@ import ReactDOM from "react-dom/client";
 import React from "react";
 import { render } from "react-dom";
 
-
-// const Heading=<h1 className="head" tabIndex="5">HEADING THROUGH JSX</h1>
-
-//functional Component
-
-const number=100000
-
-const Title=()=>
-    (   
-            <h1 className="heading">Title component</h1>
-    );
-const HeadingComponent=()=>
-    (   
-        <div id="container">
-            <Title></Title>
-            {Title()}
-            
-            <h1 className="heading">Functional Component test case</h1>
-            {<h2>{number}</h2>}
+const Header=()=>{
+    return(
+        <div className="header">
+            <div className="logo-container">
+                <img className="logo" src="https://logohistory.net/wp-content/uploads/2022/10/Gofood-logo.png" />
+            </div>
+            <div className="nav-items">
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>Cart</li>
+                </ul>
+            </div>
         </div>
-    );
+    )
+}
+
+const Restaurant_card=()=>{
+    return (
+        <div className="res-card">
+            <h3>Meghna</h3>
+        </div>
+    )
+}
+
+const Body=()=>{
+    return (
+        <div className="body">
+            <div className="Search">Search</div>
+            <div className="res-container">
+                <Restaurant_card />
+            </div>
+        </div>
+    )
+}
+
+const AppLayout = ()=>{
+    return (
+        <div className="app">
+        <Header />
+        <Body />
+        
+        </div>
+    )
+}
 
 const root=ReactDOM.createRoot(document.getElementById("root"))
 
 
 // to render react component we will <Component_name />
-root.render(<HeadingComponent />)
+root.render(<AppLayout />)
