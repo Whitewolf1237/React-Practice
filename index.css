@@ -36,7 +36,7 @@
 
 .res-card:hover{
     border: 1px solid black;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .Search{
