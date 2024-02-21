@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import React from "react";
-import { render } from "react-dom";
+
 
 const Header=()=>{
     return(
