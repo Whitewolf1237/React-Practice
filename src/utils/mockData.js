@@ -1,4 +1,4 @@
-const resList=[
+let resList=[
     {
         "info": {
           "id": "410710",
@@ -34,44 +34,6 @@ const resList=[
             "opened": true
           },
           "badges": {
-            
-          },
-          "isOpen": true,
-          "type": "F",
-          "badgesV2": {
-            "entityBadges": {
-              "imageBased": {
-                
-              },
-              "textBased": {
-                
-              },
-              "textExtendedBadges": {
-                
-              }
-            }
-          },
-          "aggregatedDiscountInfoV3": {
-            "header": "ITEMS",
-            "subHeader": "AT ₹99"
-          },
-          "differentiatedUi": {
-            "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
-            "differentiatedUiMediaDetails": {
-              "mediaType": "ADS_MEDIA_ENUM_IMAGE",
-              "lottie": {
-                
-              },
-              "video": {
-                
-              }
-            }
-          },
-          "reviewsSummary": {
-            
-          },
-          "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
-          "restaurantOfferPresentationInfo": {
             
           }
         }
@@ -630,5 +592,9 @@ const resList=[
         }
       }
 ]
+
+// From Spotify API 
+
+
 
 export default resList
