@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom/client";
 import React from "react";
 import Restaurant_card from "./Restaurant_card";
 import resList from "../utils/mockData";
