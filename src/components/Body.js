@@ -24,12 +24,8 @@ const Body=()=>{
     setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
-    if (listOfRestaurant.length==0 ){
-        <Shimmer /> 
-    }
-    else{
     // conditional Rendering  using ternary operator
-    return (
+    return listOfRestaurant.length==0?<Shimmer /> : (
         <div className="body">
             <div className="filter">
                 <div className="search">
@@ -67,7 +63,4 @@ const Body=()=>{
         </div>
     )
 }
-}
-
-
 export default Body

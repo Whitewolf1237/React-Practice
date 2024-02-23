@@ -4,8 +4,8 @@
   "description": "��#\u0000 \u0000R\u0000e\u0000a\u0000c\u0000t\u0000-\u0000P\u0000r\u0000a\u0000c\u0000t\u0000i\u0000c\u0000e\u0000\r\u0000 \u0000",
   "main": "app.js",
   "scripts": {
-    "start":"parcel index.html",
-    "build":"parcel build index.html",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "parcel-bundler": "^1.12.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.1"
   }
 }
