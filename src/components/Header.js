@@ -1,12 +1,20 @@
 // to import a named export we need to name them in {}
 
 import { LOGO_URL } from "../utils/constants";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 
 const Header=()=>{
     const [btnName,SetBtnName]=useState("Login")
     // let btnName="Login"
+
+// if no dependency array useEffect is called on every component render 
+// if dependency array is empty = []=> useEffect is called on initiail render(just once)
+// if dependency array is [btnnameReact]=> called everytime btnNameReact is updated
+useEffect(()=>{
+    console.log("use effect")
+})
+
 
     return(
         <div className="header">
