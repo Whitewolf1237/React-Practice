@@ -1,7 +1,8 @@
 // to import a named export we need to name them in {}
 
 import { LOGO_URL } from "../utils/constants";
-import React, { useState,useEffect } from "react";
+import React, { useState, } from "react";
+import { Link } from "react-router-dom";
 
 
 const Header=()=>{
@@ -11,9 +12,7 @@ const Header=()=>{
 // if no dependency array useEffect is called on every component render 
 // if dependency array is empty = []=> useEffect is called on initiail render(just once)
 // if dependency array is [btnnameReact]=> called everytime btnNameReact is updated
-useEffect(()=>{
-    console.log("use effect")
-})
+
 
 
     return(
@@ -23,9 +22,9 @@ useEffect(()=>{
             </div>
             <div className="nav-items">
                 <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About Us</Link></li>
+                    <li><Link to="/contact">Contact Us</Link></li>
                     <li>Cart</li>
                     <button className="login" onClick={()=>{
                         btnName=="Login"
