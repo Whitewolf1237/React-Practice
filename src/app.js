@@ -12,6 +12,7 @@ const AppLayout = ()=>{
     return (
         <div className="app">
             <Header />
+            {/* <RestaurantMenu /> */}
             {/* if path is / we should print <Body /> 
                 if path is /About we should have <About />
                     if path is /contact we should have <ContactUs />   */}
