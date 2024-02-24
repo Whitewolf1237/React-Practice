@@ -17,7 +17,7 @@ const Body=()=>{
     // API CALL     
 
     const fetchData= async ()=>{
-        const data= await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5160459&lng=77.39686770000002&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        const data= await fetch("https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D12.9351929%26lng%3D77.62448069999999%26page_type%3DDESKTOP_WEB_LISTING")
     const json = await data.json();
     
     // optional chaining 
@@ -25,7 +25,7 @@ const Body=()=>{
     setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
     // conditional Rendering  using ternary operator
-    return listOfRestaurant.length==0?<Shimmer /> : (
+    return listOfRestaurant.length===0?<Shimmer /> : (
         <div className="body">
             <div className="filter">
                 <div className="search">
