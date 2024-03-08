@@ -5,9 +5,9 @@ const About=()=>{
     return(
         <div>
             <h1>About</h1>
-            <User name={"Nitin Kumar Rai"}/>
+            {/* <User name={"Nitin Kumar Rai"}/> */}
 
-            <UserClass name={"Nitin Kumar Rai"}/>
+            <UserClass name={"Nitin Kumar Rai"} location={"Noida"}/>
         </div>
     )
 }
