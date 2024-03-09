@@ -16,18 +16,18 @@ const Header=()=>{
 
 
     return(
-        <div className="flex justify-between bg-yellow-50 shadow-lg px-2 ">
+        <div className="flex justify-between  shadow-lg px-2 bg-yell  ">
             <div className="logo-container">
                 <img className="w-56" src={LOGO_URL} />
             </div>
-            <div className="nav-items">
+            <div className="flex items-center">
                 <ul className="flex p-4 m-4">
-                    <li>Online Status:{onlineStatus?"🟢":"🔴"}</li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to="/contact">Contact Us</Link></li>
-                    <li>Cart</li>
-                    <button className="login" onClick={()=>{
+                    <li className="px-3">Online Status:{onlineStatus?"🟢":"🔴"}</li>
+                    <li className="px-3"><Link to="/">Home</Link></li>
+                    <li className="px-3"><Link to="/about">About Us</Link></li>
+                    <li className="px-3"><Link to="/contact">Contact Us</Link></li>
+                    <li className="px-3">Cart</li>
+                    <button className="px-3 bg-peach rounded" onClick={()=>{
                         btnName=="Login"
                         ?SetBtnName("Logout")
                         :SetBtnName("Login")

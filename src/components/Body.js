@@ -34,38 +34,40 @@ const onlineStatus=useOnlineStatus();
 
     // conditional Rendering  using ternary operator
     return listOfRestaurant.length===0?<Shimmer /> : (
-        <div className="body">
-            <div className="filter">
-                <div className="search">
+        <div className="body bg-peach" >
+            <div className="filter flex justify-between items-center">
+                <div className="search m-4 p-4">
                     <input 
                         type="text" 
-                        className="search-box" 
+                        className="search-box border border-solid border-black" 
                         value={searchText} 
                         onChange={(e)=>{
                             setSearchText(e.target.value)
                         }}
                     />
-                    <button 
-                        onClick={()=>{
-                            const filterRestaurant=listOfRestaurant.filter((res)=>
-                            res.info.name.toLowerCase().includes(searchText.toLowerCase())
-                            )
-                            setFilteredRestaurant(filterRestaurant)
-                        }}
-                        >
-                            Search
-                    </button>
+                        <button className="px-4 py-2 bg-pinky m-4 rounded "
+                            onClick={()=>{
+                                const filterRestaurant=listOfRestaurant.filter((res)=>
+                                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                                )
+                                setFilteredRestaurant(filterRestaurant)
+                            }}
+                            >
+                                Search
+                        </button>
                 </div>
-                <button className="filter_btn" 
-                onClick={()=>{
-                    
-                    const filteredList=listOfRestaurant.filter((res)=> res.info.avgRating >= 4.4);
-                    setListOfRestaurant(filteredList)
+                <div>
+                    <button className="filter_btn px-4 py-2 m-4 bg-pinky rounded" 
+                    onClick={()=>{
+                        
+                        const filteredList=listOfRestaurant.filter((res)=> res.info.avgRating > 4.3);
+                        setListOfRestaurant(filteredList)
+                        }
                     }
-                }
-                >Top Rated Restaurant</button>
+                    >Top Rated Restaurant</button>
+                </div>
             </div>
-            <div className="res-container">
+            <div className="res-container flex flex-wrap ">
                 {filteredRestaurant.map((restaurant)=><Restaurant_card key={restaurant.info.id} resData={restaurant}/>)} 
             </div>
         </div>
