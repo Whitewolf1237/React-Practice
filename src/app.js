@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import React from "react";
+import React,{lazy} from "react";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js"; 
 import { createBrowserRouter,RouterProvider,Outlet  } from "react-router-dom";
