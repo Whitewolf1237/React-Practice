@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Restaurant_card from "./Restaurant_card";
 import { useState } from "react";
 import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body=()=>{
 
@@ -24,6 +25,13 @@ const Body=()=>{
     setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     }
+
+const onlineStatus=useOnlineStatus();
+    if(onlineStatus==false){
+        return <h1>Looks like you are offline</h1>
+    }
+
+
     // conditional Rendering  using ternary operator
     return listOfRestaurant.length===0?<Shimmer /> : (
         <div className="body">

@@ -3,7 +3,7 @@ import React from "react";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js"; 
 import { createBrowserRouter,RouterProvider,Outlet  } from "react-router-dom";
-import About from "./components/about.js";
+import About from "./components/About.js";
 import Error from "./components/Error.js";
 import ContactUs from "./components/contactUs.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
