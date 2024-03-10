@@ -33,7 +33,7 @@ const onlineStatus=useOnlineStatus();
 
 
     // conditional Rendering  using ternary operator
-    return listOfRestaurant.length===0?<Shimmer /> : (
+    return listOfRestaurant.length==0?<Shimmer /> : (
         <div className="body bg-peach" >
             <div className="filter flex justify-between items-center">
                 <div className="search m-4 p-4">
@@ -45,7 +45,7 @@ const onlineStatus=useOnlineStatus();
                             setSearchText(e.target.value)
                         }}
                     />
-                        <button className="px-4 py-2 bg-pinky m-4 rounded "
+                        <button className="px-4 py-2 bg-pinky m-4 rounded hover:shadow-xl"
                             onClick={()=>{
                                 const filterRestaurant=listOfRestaurant.filter((res)=>
                                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -57,10 +57,11 @@ const onlineStatus=useOnlineStatus();
                         </button>
                 </div>
                 <div>
-                    <button className="filter_btn px-4 py-2 m-4 bg-pinky rounded" 
+                    <button className="filter_btn px-4 py-2 m-4 bg-pinky rounded hover:shadow-xl" 
                     onClick={()=>{
                         
-                        const filteredList=listOfRestaurant.filter((res)=> res.info.avgRating > 4.3);
+                        const filteredList=listOfRestaurant.filter(
+                            (res)=> res.info.avgRating > 4.3);
                         setListOfRestaurant(filteredList)
                         }
                     }
