@@ -7,4 +7,4 @@ export const LOGO_URL="https://logohistory.net/wp-content/uploads/2022/10/Gofood
 // one default export in one file at a time 
 
 
-export const MENU_API ="https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.61450&lng=77.30630&restaurantId=";
+export const MENU_API ='https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=';
