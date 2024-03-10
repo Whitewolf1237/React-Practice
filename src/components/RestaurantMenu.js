@@ -1,121 +1,102 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // import useParams for read `resId`
-import {
-  swiggy_menu_api_URL,
-  IMG_CDN_URL,
-  ITEM_IMG_CDN_URL,
-  MENU_ITEM_TYPE_KEY,
-  RESTAURANT_TYPE_KEY,
-} from "./constants";
-import {MenuShimmer} from "./Shimmer";
+import { useParams } from 'react-router-dom';
+// import Shimmer from './Shimmer';
+import useRestaurantMenu from '../utils/useRestaurantmenu';
+import ShimmerMenu from './ShimmerMenu';
+import { CDN_URL } from '../utils/constants';
+import { FiClock } from 'react-icons/fi';
+import { AiOutlineStar } from 'react-icons/ai';
+import React from 'react';
 
 const RestaurantMenu = () => {
-  const { resId } = useParams(); // call useParams and get value of restaurant id using object destructuring
-  const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
-  const [menuItems, setMenuItems] = useState([]);
-  useEffect(() => {
-    getRestaurantInfo(); // call getRestaurantInfo function so it fetch api data and set data in restaurant state variable
-  }, []);
+  const { resId } = useParams();
 
-  async function getRestaurantInfo() {
-    try {
-      const response = await fetch(swiggy_menu_api_URL + resId);
-      const json = await response.json();
+  const resInfo = useRestaurantMenu(resId);
 
-      // Set restaurant data
-      const restaurantData = json?.data?.cards?.map(x => x.card)?.
-                             find(x => x && x.card['@type'] === RESTAURANT_TYPE_KEY)?.card?.info || null;
-      setRestaurant(restaurantData);
+  if (resInfo === null) return <ShimmerMenu />;
 
-      // Set menu item data
-      const menuItemsData = json?.data?.cards.find(x=> x.groupedCard)?.
-                            groupedCard?.cardGroupMap?.REGULAR?.
-                            cards?.map(x => x.card?.card)?.
-                            filter(x=> x['@type'] == MENU_ITEM_TYPE_KEY)?.
-                            map(x=> x.itemCards).flat().map(x=> x.card?.info) || [];
-      
-      const uniqueMenuItems = [];
-      menuItemsData.forEach((item) => {
-        if (!uniqueMenuItems.find(x => x.id === item.id)) {
-          uniqueMenuItems.push(item);
-        }
-      })
-      setMenuItems(uniqueMenuItems);
-    } catch (error) {
-      setMenuItems([]);
-      setRestaurant(null);
-      console.log(error);
-    }
-  }
+  const {
+    name,
+    cuisines,
+    costForTwoMessage,
+    cloudinaryImageId,
+    avgRating,
+    deliveryTime,
+  } = resInfo?.cards[0]?.card?.card?.info;
 
-  return !restaurant ? (
-    <MenuShimmer />
-  ) : (
-    <div className="restaurant-menu">
-      <div className="restaurant-summary">
-        <img
-          className="restaurant-img"
-          src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
-          alt={restaurant?.name}
-        />
-        <div className="restaurant-summary-details">
-          <h2 className="restaurant-title">{restaurant?.name}</h2>
-          <p className="restaurant-tags">{restaurant?.cuisines?.join(", ")}</p>
-          <div className="restaurant-details">
-            <div className="restaurant-rating" style={
-            (restaurant?.avgRating) < 4
-              ? { backgroundColor: "var(--light-red)" }
-              : (restaurant?.avgRating) === "--"
-              ? { backgroundColor: "white", color: "black" }
-              : { color: "white" }
-          }>
-            <i className="fa-solid fa-star"></i>
-              <span>{restaurant?.avgRating}</span>
-            </div>
-            <div className="restaurant-rating-slash">|</div>
-            <div>{restaurant?.sla?.slaString}</div>
-            <div className="restaurant-rating-slash">|</div>
-            <div>{restaurant?.costForTwoMessage}</div>
+  const { itemCards } =
+    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+
+  console.log(itemCards);
+
+  return (
+    <div className="menu h-auto">
+      <header className="menu-header">
+        <div className="menu-header-left">
+          <img className='w-52 h-52' src={CDN_URL + cloudinaryImageId} alt="Restaurent Info" />
+        </div>
+        <div className="menu-header-right">
+          <div className="top">
+            <h1>{name}</h1>
+            <h3>{cuisines.join(', ')}</h3>
+          </div>
+          <div className="bottom">
+            <h4 className="avg-rating">
+              <span
+                className="icons"
+                style={{
+                  position: 'relative',
+                  top: '2px',
+                  marginRight: '3px',
+                }}
+              >
+                <AiOutlineStar />
+              </span>
+              <span>{avgRating}</span>
+            </h4>
+            <h4 className="time">
+              <span
+                className="icons"
+                style={{
+                  position: 'relative',
+                  top: '2px',
+                  marginRight: '3px',
+                }}
+              >
+                <FiClock />
+              </span>
+              <span> {deliveryTime} MINS</span>
+            </h4>
+            <h3>{costForTwoMessage}</h3>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="restaurant-menu-content">
-        <div className="menu-items-container">
-          <div className="menu-title-wrap">
-            <h3 className="menu-title">Recommended</h3>
-            <p className="menu-count">
-              {menuItems.length} ITEMS
-            </p>
-          </div>
-          <div className="menu-items-list">
-            {menuItems.map((item) => (
-              <div className="menu-item" key={item?.id}>
-                <div className="menu-item-details">
-                  <h3 className="item-title">{item?.name}</h3>
-                  <p className="item-cost">
-                    {item?.price > 0
-                      ? new Intl.NumberFormat("en-IN", {
-                          style: "currency",
-                          currency: "INR",
-                        }).format(item?.price / 100)
-                      : " "}
-                  </p>
-                  <p className="item-desc">{item?.description}</p>
-                </div>
-                <div className="menu-img-wrapper">
-                  {item?.imageId && (
-                    <img
-                      className="menu-item-img"
-                      src={ITEM_IMG_CDN_URL + item?.imageId}
-                      alt={item?.name}
-                    />
-                  )}
-                  <button className="add-btn"> ADD +</button>
-                </div>
+      <div className="menu-main flex flex-wrap" >
+        <h2>Menu</h2>
+        <h3 className="items">{itemCards.length} items</h3>
+        <div className="menu-main-card-container">
+          {itemCards.map((item) => (
+            <div key={item.card.info.id} className="menu-card">
+              <div className="menu-card-left">
+                <h2 className="menu-name">{item.card.info.name}</h2>
+                <h3 className="menu-price">
+                  ₹
+                  {item.card.info.price / 100 ||
+                    item.card.info.defaultPrice / 100}
+                </h3>
+                <h4 className="menu-description">
+                  {item.card.info.description}
+                </h4>
               </div>
-            ))}
-          </div>
+              <div className="menu-card-right">
+                <img className='w-52 h-52' src={CDN_URL + item.card.info.imageId} alt="Menu Info" />
+              </div>
+            </div>
+          ))}
+
+          {/* <li>{itemCards[0].card.info.name}</li>
+        <li>{itemCards[1].card.info.name}</li>
+        <li>{itemCards[2].card.info.name}</li> */}
         </div>
       </div>
     </div>

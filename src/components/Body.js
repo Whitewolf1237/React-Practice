@@ -3,6 +3,7 @@ import Restaurant_card from "./Restaurant_card";
 import { useState } from "react";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { Link } from "react-router-dom";
 
 const Body=()=>{
 
@@ -10,15 +11,15 @@ const Body=()=>{
     const [listOfRestaurant,setListOfRestaurant] = useState([])
     const [filteredRestaurant,setFilteredRestaurant]=useState([])
     const [searchText,setSearchText]=useState()
-
+    console.log(listOfRestaurant)
     useEffect(()=>{
         fetchData();
-    });
+    },[]);
 
     // API CALL     
 
     const fetchData= async ()=>{
-        const data= await fetch("https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D12.9351929%26lng%3D77.62448069999999%26page_type%3DDESKTOP_WEB_LISTING")
+        const data= await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61450&lng=77.30630&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
     const json = await data.json();
     
     // optional chaining 
@@ -31,9 +32,12 @@ const onlineStatus=useOnlineStatus();
         return <h1>Looks like you are offline</h1>
     }
 
-
+    if (listOfRestaurant?.length===0){
+        <Shimmer />
+    }
+    else{
     // conditional Rendering  using ternary operator
-    return listOfRestaurant.length==0?<Shimmer /> : (
+    return(
         <div className="body bg-peach" >
             <div className="filter flex justify-between items-center">
                 <div className="search m-4 p-4">
@@ -61,17 +65,24 @@ const onlineStatus=useOnlineStatus();
                     onClick={()=>{
                         
                         const filteredList=listOfRestaurant.filter(
-                            (res)=> res.info.avgRating > 4.3);
-                        setListOfRestaurant(filteredList)
+                            (res)=> res.info.avgRating > 4.2);
+                        setFilteredRestaurant(filteredList)
                         }
                     }
                     >Top Rated Restaurant</button>
                 </div>
             </div>
-            <div className="res-container flex flex-wrap ">
-                {filteredRestaurant.map((restaurant)=><Restaurant_card key={restaurant.info.id} resData={restaurant}/>)} 
+            <div className="res-container flex flex-wrap">
+                {filteredRestaurant.map((restaurant)=>(
+                    <Link 
+                        to={"/restaurants/"+ restaurant.info.id} 
+                        key={restaurant.info.id}>
+                            <Restaurant_card  resData={restaurant}/> 
+                    </Link>
+                ))} 
             </div>
         </div>
     )
+}
 }
 export default Body

@@ -27,7 +27,7 @@ const Header=()=>{
                     <li className="px-3"><Link to="/about">About Us</Link></li>
                     <li className="px-3"><Link to="/contact">Contact Us</Link></li>
                     <li className="px-3">Cart</li>
-                    <button className="px-3 bg-peach rounded hover:shadow-xl" onClick={()=>{
+                    <button className="px-3 bg-pink rounded hover:shadow-xl" onClick={()=>{
                         btnName=="Login"
                         ?SetBtnName("Logout")
                         :SetBtnName("Login")
