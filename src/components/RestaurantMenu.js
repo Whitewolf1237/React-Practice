@@ -21,6 +21,7 @@ const RestaurantMenu = () => {
     cloudinaryImageId,
     avgRating,
     deliveryTime,
+    totalRatingsString,
   } = resInfo?.cards[0]?.card?.card?.info;
 
   const { itemCards } =
@@ -29,68 +30,55 @@ const RestaurantMenu = () => {
   console.log(itemCards);
 
   return (
-    <div className="menu h-auto">
+    <div className="menu border border-black m-4 px-60 flex flex-col rounded-lg  ">
       <header className="menu-header">
-        <div className="menu-header-left">
-          <img className='w-52 h-52' src={CDN_URL + cloudinaryImageId} alt="Restaurent Info" />
-        </div>
+        {/* <div className="menu-header-left ">
+          <img className='w-52 h-52 ' src={CDN_URL + cloudinaryImageId} alt="Restaurent Info" />
+        </div> */}
         <div className="menu-header-right">
           <div className="top">
-            <h1>{name}</h1>
-            <h3>{cuisines.join(', ')}</h3>
+            <h1 className='font-bold font-serif py-2'>{name}</h1>
           </div>
           <div className="bottom">
-            <h4 className="avg-rating">
-              <span
-                className="icons"
-                style={{
-                  position: 'relative',
-                  top: '2px',
-                  marginRight: '3px',
-                }}
-              >
-                <AiOutlineStar />
-              </span>
-              <span>{avgRating}</span>
-            </h4>
-            <h4 className="time">
-              <span
-                className="icons"
-                style={{
-                  position: 'relative',
-                  top: '2px',
-                  marginRight: '3px',
-                }}
-              >
-                <FiClock />
-              </span>
-              <span> {deliveryTime} MINS</span>
-            </h4>
-            <h3>{costForTwoMessage}</h3>
+              <div className='flex justify-between'>
+                <h3 className='text-gray-400 py-4'>{cuisines.join(', ')}</h3>
+                  <div className='border rounded-lg flex flex-col items-center p-2 shadow-sm'>
+                  <h4 className="avg-rating">
+                    <span className='text-yellow-400  '>⭐{avgRating}</span>
+                  </h4>
+                  <h4 className='text-gray-400'>{totalRatingsString}</h4>
+                  </div>
+                </div>
+              <h3 className='text-gray-400'>{costForTwoMessage}</h3>
           </div>
         </div>
       </header>
-
-      <div className="menu-main flex flex-wrap" >
-        <h2>Menu</h2>
-        <h3 className="items">{itemCards.length} items</h3>
-        <div className="menu-main-card-container">
+    <hr className='bg-gray-500 my-4'/>
+      <div className="menu-main" >
+        <h2 className='font-bold font-serif underline'>Menu</h2>
+        <h3 className="items font-semibold font-mono">{itemCards.length} items</h3>
+        <div className="menu-main-card-container ">
           {itemCards.map((item) => (
-            <div key={item.card.info.id} className="menu-card">
-              <div className="menu-card-left">
-                <h2 className="menu-name">{item.card.info.name}</h2>
-                <h3 className="menu-price">
-                  ₹
-                  {item.card.info.price / 100 ||
-                    item.card.info.defaultPrice / 100}
-                </h3>
-                <h4 className="menu-description">
-                  {item.card.info.description}
-                </h4>
+            <div key={item.card.info.id} className="menu-card flex flex-col flex-wrap my-4">
+                <div className='flex flex-row justify-between'>
+                  <hr className='bg-gray-500 my-4'/>
+                    <div className="menu-card-left px-3 text-center">
+                      <h2 className="menu-name font-serif font-bold">{item.card.info.name}</h2>
+                      <h3 className="menu-price font-serif py-1">
+                        ₹
+                        {item.card.info.price / 100 ||
+                          item.card.info.defaultPrice / 100}
+                      </h3>
+                      <h4 className="menu-description text-gray-500 py-3">
+                        {item.card.info.description}
+                      </h4>
+                    </div>
+                    <div className="menu-card-right">
+                      <img className='relative max-w-md max-h-md  rounded-lg overflow-hidden p-1' src={CDN_URL + item.card.info.imageId} alt="Menu Info" />
+                    </div>
+                    
               </div>
-              <div className="menu-card-right">
-                <img className='w-52 h-52' src={CDN_URL + item.card.info.imageId} alt="Menu Info" />
-              </div>
+              <hr className='bg-gray-500 my-4'/>
             </div>
           ))}
 

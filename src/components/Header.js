@@ -16,7 +16,7 @@ const Header=()=>{
 
 
     return(
-        <div className="flex justify-between  shadow-lg px-2 bg-yell sm:bg-summer_green  ">
+        <div className="flex justify-between  shadow-lg px-2 bg-green-100 sm:bg-summer_green  ">
             <div className="logo-container">
                 <img className="w-56" src={LOGO_URL} />
             </div>
@@ -27,7 +27,7 @@ const Header=()=>{
                     <li className="px-3"><Link to="/about">About Us</Link></li>
                     <li className="px-3"><Link to="/contact">Contact Us</Link></li>
                     <li className="px-3">Cart</li>
-                    <button className="px-3 bg-pink rounded hover:shadow-xl" onClick={()=>{
+                    <button className="px-3 bg-yellow-100 rounded hover:shadow-xl" onClick={()=>{
                         btnName=="Login"
                         ?SetBtnName("Logout")
                         :SetBtnName("Login")
